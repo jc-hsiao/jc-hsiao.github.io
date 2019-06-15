@@ -1,0 +1,614 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 3.2//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>FEED MII RECIPES CHECK</title>
+	
+	
+    <script>
+	var N = 149;
+	var IN = 12;
+	
+	var ingName= [
+	"Beef","Salmon","Tuna","Pork","Tomato","Chicken",
+	"Mushroom","Flour","Rice","Potato","Onion","Egg"
+	];
+	
+	var dishName = [ 
+	"Beef and Rice Casserole", 
+	"Meat Omelet", 
+	"Beef & Salmon Barbeque", 
+	"Beef with Tuna Sauce", 
+	"Pork & Salmon Stir Fry", 
+	"Pork with Mushroom Sauce", 
+	"Chicken & Salmon Cream Stew", 
+	"Pork Dumplings", 
+	"Sautéed Pork", 
+	"Sautéed Chicken", 
+	"Sushi", 
+	"Fried Rice", 
+	"Potato Gratin", 
+	"Roast Beef", 
+	"Roast Chicken", 
+	"Meatballs", 
+	"Beef Pie", 
+	"Hashed Beef", 
+	"Beef Curry", 
+	"Meatloaf", 
+	"Potato Croquettes", 
+	"Pork & Egg Stir-Fry", 
+	"Seafood Paelle", 
+	"Pork Chop Suey", 
+	"Spanish Omelet", 
+	"French Onion Soup", 
+	"Potato Salad", 
+	"Mushroom Potpie", 
+	"Tomato Risotto", 
+	"Scotch Eggs", 
+	"Salisbury Steak & Eggs", 
+	"Chicken Escalopes", 
+	"Pork Curry", 
+	"Chicken Curry", 
+	"Chicken Cream Stew", 
+	"Chicken Tomato Stew", 
+	"Tuna Sandwich", 
+	"Tuna Salad", 
+	"Tuna Carpaccio", 
+	"Salmon Meuneiré", 
+	"Salmon Stew", 
+	"Onion Rings", 
+	"Moroccan Tomato Salad", 
+	"Fried Chicken", 
+	"Salisbury Steak with Veggies", 
+	"Spaghetti Bolognese", 
+	"Beef Stew", 
+	"Spaghetti Carbonara", 
+	"Chicken Omurice", 
+	"Tuna Terrine", 
+	"Salmon Bouillabaisse", 
+	"Salmon Omelet", 
+	"Marinated Salmon", 
+	"Onion Bread", 
+	"Vegetable Quiche", 
+	"Hokkien Fried Rice", 
+	"Mushroom Risotto", 
+	"Chilled Potato Potage", 
+	"Egg Tarts", 
+	"Beef Pho", 
+	"Meat & Fish Hot Pot", 
+	"Minestrone Soup", 
+	"Pot-au-feu", 
+	"Jambalaya", 
+	"Lasagna", 
+	"Acqua Pazza", 
+	"Flan", 
+	"Margherita Pizza", 
+	"Bramboracka", 
+	"Epic Lunch", 
+	"Epic Banquet", 
+	"Grilled Beef", 
+	"Grilled Pork", 
+	"Chicken Drumsticks", 
+	"Sautéed Tuna", 
+	"Sautéed Salmon", 
+	"Fried Egg", 
+	"Rice", 
+	"Bread", 
+	"Sliced Tomato", 
+	"Roasted Onion", 
+	"Baked Potato", 
+	"Fried Mushrooms", 
+	"Beef & Pork Platter", 
+	"Beef & Chicken Platter", 
+	"Beef & Tuna Platter", 
+	"Beef & Salmon Platter", 
+	"Grilled Beef with Fried Egg", 
+	"Grilled Beef with Rice", 
+	"Grilled Beef with Bread", 
+	"Grilled Beef with Tomato", 
+	"Grilled Beef with Onion", 
+	"Grilled Beef with Potato", 
+	"Grilled Beef with Mushrooms", 
+	"Pork & Chicken Platter", 
+	"Pork & Tuna Platter", 
+	"Pork & Salmon Platter", 
+	"Grilled Pork with Fried Egg", 
+	"Grilled Pork with Rice", 
+	"Grilled Pork with Bread", 
+	"Grilled Pork with Tomato", 
+	"Grilled Pork with Onion", 
+	"Grilled Pork with Potato", 
+	"Grilled Pork with Mushrooms", 
+	"Chicken & Tuna Platter", 
+	"Chicken & Salmon Platter", 
+	"Chicken with Fried Egg", 
+	"Chicken with Rice", 
+	"Chicken with Bread", 
+	"Chicken with Tomato", 
+	"Chicken with Onion", 
+	"Chicken with Potato", 
+	"Chicken with Mushrooms", 
+	"Tuna & Salmon Platter", 
+	"Tuna with Fried Egg", 
+	"Tuna with Rice", 
+	"Tuna with Bread", 
+	"Tuna with Tomato", 
+	"Tuna with Onion", 
+	"Tuna with Potato", 
+	"Tuna with Mushrooms", 
+	"Salmon with Fried Egg", 
+	"Salmon with Rice", 
+	"Salmon with Bread", 
+	"Salmon with Tomato", 
+	"Salmon with Onion", 
+	"Salmon with Potato", 
+	"Salmon with Mushrooms", 
+	"Fried Egg with Rice", 
+	"Fried Egg with Bread", 
+	"Fried Egg with Tomato", 
+	"Fried Egg with Onion", 
+	"Fried Egg with Potato", 
+	"Fried Egg with Mushrooms", 
+	"Rice with Bread", 
+	"Tomato with Rice", 
+	"Onion with Rice", 
+	"Baked Potato with Rice", 
+	"Mushrooms with Rice", 
+	"Tomato with Bread", 
+	"Onion with Bread", 
+	"Baked Potato with Bread", 
+	"Fried Mushrooms with Bread", 
+	"Fried Onion with Tomato", 
+	"Baked Potato with Tomato", 
+	"Fried Mushrooms with Tomato", 
+	"Baked Potato with Onion", 
+	"Friend Onion with Mushrooms", 
+	"Baked Potato with Mushrooms"
+	];
+
+	var ingDB = [
+	[ 1,-1,-1, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+	[ 1,-1,-1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+	[ 1, 1, 0, 0, 0, 0, 0, 0,-1, 0, 1, 0],
+	[ 1, 0, 1, 0, 0, 0, 0, 0,-1, 0, 1, 0],
+	[ 0, 1, 0, 1, 0, 0, 0, 0,-1, 0, 1, 0],
+	[ 0, 0,-1, 1, 0, 0, 1,-1,-1, 0, 0, 0],
+	[ 0, 1, 0, 0, 0, 1, 0, 1,-1, 0, 0, 0],
+	[ 0, 0, 0, 1,-1, 0, 0, 1,-1, 0, 0,-1],
+	[ 0,-1,-1, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+	[ 0,-1,-1, 0, 0, 1, 0, 0, 0, 0, 1, 0],
+	[ 0, 1, 1, 0, 0, 0, 0,-1, 1, 0, 0, 0],
+	[ 0, 0, 0, 1, 0, 0, 0,-1, 1, 0, 0, 1],
+	[ 0, 0, 0, 0, 0, 0, 1, 1,-1, 1, 0, 0],
+	[ 1,-1,-1,-1, 0,-1, 0, 0, 0, 0, 1, 0],
+	[-1,-1,-1,-1, 0, 1, 0, 0, 0, 0, 1, 0],
+	[ 1,-1,-1, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+	[ 1,-1,-1, 0, 0, 0, 0, 1,-1, 0, 0, 1],
+	[ 1,-1,-1, 0, 1, 0, 0, 0, 0, 0, 1,-1],
+	[ 1, 0, 0,-1, 0,-1, 0,-1, 1, 1, 1, 0],
+	[ 1,-1,-1, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+	[ 0,-1,-1, 0, 0, 0, 0, 1, 0, 1, 0, 1],
+	[ 0, 0, 0, 1, 0, 0, 0,-1,-1, 0, 1, 1],
+	[ 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+	[ 0,-1,-1, 1, 0, 0, 1,-1, 0, 0, 0, 1],
+	[ 0,-1,-1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+	[ 0, 0, 0, 0, 0, 0, 1, 1,-1, 0, 1, 0],
+	[ 0, 0, 0, 0, 1, 0, 0,-1,-1, 1, 1, 0],
+	[ 0,-1,-1, 0, 0, 0, 1, 1, 0, 0, 0, 1],
+	[ 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1,-1],
+	[ 0,-1,-1, 1, 0, 0, 0, 1,-1, 0, 0, 1],
+	[ 1,-1,-1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+	[ 0,-1,-1, 0, 0, 1, 1, 1,-1, 0, 0, 0],
+	[-1, 0, 0, 1, 0,-1, 0,-1, 1, 1, 1, 0],
+	[-1, 0, 0,-1, 0, 1, 0,-1, 1, 1, 1, 0],
+	[-1,-1,-1,-1, 0, 1, 0, 1, 0, 1, 0, 0],
+	[-1,-1,-1,-1, 1, 1, 1, 0, 0, 0, 0, 0],
+	[-1,-1, 1,-1, 0,-1, 0, 1,-1, 0, 0, 1],
+	[-1,-1, 1,-1, 1,-1, 0,-1,-1, 0, 1, 0],	
+	[-1,-1, 1,-1, 1,-1, 0, 0, 0,-1, 1, 0],
+	[-1, 1,-1,-1, 0,-1, 1, 1,-1, 0, 0, 0],
+	[-1, 1,-1,-1, 0,-1, 0, 1,-1, 1, 0, 0],
+	[-1,-1,-1,-1, 0,-1, 0, 1,-1, 0, 1, 1],	
+	[ 0,-1,-1, 0, 1, 0, 0,-1, 0, 0, 1, 0],
+	[-1,-1,-1,-1, 0, 1, 0, 1, 0, 0, 0, 1],
+	[ 1,-1,-1, 1, 1, 0, 0, 0, 0, 0, 1, 1],
+	[ 1,-1,-1, 0, 1, 0, 0, 1,-1, 0, 0, 0],	
+	[ 1,-1,-1,-1, 0,-1, 1, 0, 0, 1, 1, 0],
+	[ 0,-1,-1, 1,-1, 0, 0, 1,-1, 0, 0, 1],
+	[-1,-1,-1,-1, 0, 1, 0, 0, 1, 0, 1, 1],
+	[-1, 0, 1,-1, 0,-1, 1, 0, 0, 0, 1, 0],	
+	[-1, 1,-1,-1, 1,-1, 0,-1, 0, 1, 0,-1],
+	[-1, 1,-1,-1, 0,-1, 1, 0,-1, 0, 0, 1],
+	[-1, 1,-1,-1, 1,-1, 0, 0,-1, 0, 1, 0],
+	[-1,-1,-1,-1, 0,-1, 0, 1,-1, 0, 1, 1],
+	[ 0,-1,-1, 0, 1, 0, 1, 0, 0, 0, 1, 1],
+	[ 0, 0, 0, 0, 0, 1, 1,-1, 1, 0, 0, 1],
+	[-1,-1,-1,-1, 0,-1, 1, 0, 1, 0, 1, 0],
+	[-1,-1,-1,-1, 0,-1, 0, 1, 0, 1, 1, 0],
+	[-1,-1,-1,-1, 0,-1, 0, 1, 0, 0, 0, 1],
+	[ 1,-1,-1,-1, 0,-1, 0,-1, 1, 0, 1, 0],
+	[ 1, 1, 1, 1,-1, 1, 0,-1, 0, 0, 0, 0],
+	[ 0,-1,-1, 1, 1, 0, 0, 0, 0, 1, 1, 0],
+	[ 0,-1,-1, 1,-1, 0, 1, 0, 0, 1, 1, 0],
+	[ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1,-1],
+	[ 1,-1,-1, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+	[-1, 1, 1,-1, 1,-1, 0,-1, 0, 0, 0,-1],
+	[-1,-1,-1,-1,-1,-1,-1, 1,-1,-1,-1, 1],
+	[-1,-1,-1,-1, 1,-1,-1, 1,-1,-1, 0,-1],
+	[ 0, 0, 0, 0, 0, 0, 1, 0,-1, 1, 1,-1],
+	[ 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1],
+	[ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	[ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+	[ 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+	[ 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	[ 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+	[ 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+	[ 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+	[ 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+	[ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+	[ 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+	[ 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
+	[ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+	[ 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
+	[ 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+	[ 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+	[ 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+	[ 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+	[ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
+	[ 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+	[ 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+	[ 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	[ 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+	[ 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+	[ 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+	[ 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+	[ 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	[ 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+	[ 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+	[ 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+	[ 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+	[ 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+	[ 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+	[ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+	[ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+	[ 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
+	[ 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0],
+	[ 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
+	[ 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0],
+	[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+	[ 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+	[ 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0]
+	];	
+	
+	//0 means it's not made before
+	//1 means it's made before but not the jumbo version
+	//2 means that the jumbo version is made before
+	var compRec = [
+	2,1,2,2,0,2,2,2,2,1,
+	2,2,2,2,0,0,2,1,0,0,
+	0,0,2,0,0,0,0,0,0,0,
+	0,0,0,0,2,2,0,0,0,0,
+	0,0,0,0,0,2,0,0,0,0,
+	0,0,0,0,0,0,0,0,2,0,
+	0,0,0,0,0,0,1,2,0,1,
+	2,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,1,1,1,1,
+	1,1,1,1,1,1,1,1,1	
+	]
+	
+	var whatuhave = [0,0,0,0,0,0,0,0,0,0,0,0];
+	
+	
+	//function that search for available dish based on the 'whatuhave'ingredient array
+	//also prints the table
+	function search(){
+		
+		var result = "";
+		var ava = 0;
+		var count = 0;
+		var max = 6;//change line after printing this many ings
+		
+		result += "<table>"
+		for(var i=0; i<(N-78) ; i++){
+		
+			//only print the dish that matches the given ingredients
+			if(checkIng(i,whatuhave)==1 ){
+				
+				//give different class names to complete/no jumbo/not complete dish
+				if(compRec[i]==0)
+					result+="<tr class='tr0'>";
+				else if(compRec[i]==1)
+					result+="<tr class='tr1'>";
+				else if(compRec[i]==2)
+					result+="<tr class='tr2'>";
+							
+				result += "<td class='tdL' >"+
+						"<span class='makedish' onclick='makedish("+i+",0,0)'>"+
+						dishName[i]+"</span></td><td>";
+				ava++;
+
+				
+				for(var j=0; j<IN ; j++){
+					if(ingDB[i][j] == 1){
+						if(count==max)
+							result += "<br>";
+						if(whatuhave[j] > 1){
+							result += "<span class='ings makejumb' onclick='makedish("+i+",1,"+j+")'>";
+							result += ingName[j] +"</span>";
+							count++;
+						}
+						else{
+							result += "<span class='ings'>";
+							result += ingName[j]+"</span>" ;
+							count++;
+						}
+					}
+				}
+				count = 0;
+				result += "</td></tr>";
+			}
+		}
+		result += "</table>"
+		if(ava==0) result = "No recipe found.";
+		document.getElementById('display').innerHTML = result;
+	}
+
+
+	function checkIng( foodID , inguhave ){
+		var flag = 1;
+		for(var i=0; i<IN; i++){
+			if(ingDB[foodID][i]==1 && inguhave[i]==0){
+			flag = 0;
+			break;}
+		}
+		return flag;
+	}
+	
+	
+	function printStuff(){
+		var result = "";
+		for(var i=0; i<IN; i++){
+			result += 
+			"<div id='ingBT" +i+ "' class='ingBT' onclick='countIng(" + i +
+			")'> <div id='ingC"+i+"' class='ingC'></div> "+ingName[i]+"</div>"
+			if(i == 5)
+			 result += "<br>";
+		}
+		document.getElementById('ingmenu').innerHTML = result;
+		
+		
+	}
+	
+	var mycolor = ["#eee","#c6edf2","#caf1c5","#f0eec4","#fce2c2","#ffbeaf"];
+	function countIng(type){
+		var max =5;
+		var BTstring = "ingBT"+type;
+		var ingCstring = "ingC"+type;
+
+		whatuhave[type]++;
+		if(whatuhave[type]<=max){
+			document.getElementById(ingCstring).innerHTML = whatuhave[type];
+		}else{ 
+			whatuhave[type] = 0;			
+			document.getElementById(ingCstring).innerHTML = "";
+		}
+		document.getElementById(BTstring).style.backgroundColor = mycolor[whatuhave[type]];
+
+	}
+
+	function makedish(dishID,jumbo,jumboing){
+		var BTstring;
+		var ingCstring;
+		var hi=" ";
+		
+		if(compRec[dishID]<2)
+			compRec[dishID]++;
+				
+		for(var i=0; i<IN; i++){
+			if(ingDB[dishID][i]==1){
+				if( jumbo==1 && i==jumboing )//If we are cooking jumbo dish
+					whatuhave[i] = whatuhave[i]-2;
+				else
+					whatuhave[i]--;
+				BTstring = "ingBT"+i;
+				ingCstring = "ingC"+i;
+				document.getElementById(BTstring).style.backgroundColor = mycolor[whatuhave[i]];
+				document.getElementById(ingCstring).innerHTML = whatuhave[i];
+				if(whatuhave[i]==0)
+					document.getElementById(ingCstring).innerHTML = "";
+			}
+		}
+		search();
+	}
+	
+	</script>
+	
+	<style>
+    html{
+		color:#222;
+		font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	}
+	.main{
+		margin:0px auto;
+		width:700px;
+	}
+	#ingmenu{
+		width:432px;
+		margin: 0px auto;
+		padding:10px;
+	}
+	#menu{
+		text-align:center;
+		border: 1px solid #cbb;
+		padding:10px;
+		margin-top: 20px;
+		margin-bottom:20px;
+		border-radius:6px;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+	.ingBT{
+		width: 64px;
+		height: 69px;
+		font-size:9pt;
+		display:inline-block;
+		text-align:center;
+		line-height:120px;
+		cursor: pointer;
+		margin: 4px;
+		border-radius:5px;
+		position:relative;
+		background:#eee no-repeat;
+	}	
+	
+	#ingBT0{background-image: url(Beef.png);}
+	#ingBT1{background-image: url(Salmon.png) ;}
+	#ingBT2{background-image: url(Tuna.png) ;}
+	#ingBT3{background-image: url(Pork.png) ;}
+	#ingBT4{background-image: url(Tomato.png) ;}
+	#ingBT5{background-image: url(Chicken.png) ;}
+	#ingBT6{background-image: url(Mushroom.png) ;}
+	#ingBT7{background-image: url(Flour.png) ;}
+	#ingBT8{background-image: url(Rice.png) ;}
+	#ingBT9{background-image: url(Potato.png) ;}
+	#ingBT10{background-image: url(Onion.png) ;}
+	#ingBT11{background-image: url(Egg.png) ;}
+	
+	.ingC{
+		position:absolute;
+		margin-left:2px;
+		height:10px;
+		width:10px;
+		line-height:20px;
+	}
+	
+
+	#runBT{
+		margin:10px 0px;
+		display: inline-block;
+		border:1px solid #BFBFBF;
+		color: #666;
+		border-radius: 30px;
+		width: auto;
+		height: auto;
+		font-size: 16px;
+		padding: 10px 40px;
+		background-color: #FCFAF9;
+		cursor: pointer;
+		-webkit-transition: background-color 0.2s ease-in-out;
+		-moz-transition: background-color 0.2s ease-in-out;
+		-o-transition: background-color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out;
+	}
+	
+	#runBT:hover, #runBT:active{
+		background-color: #E8E8E8;
+
+	}	
+	
+
+	
+	.tr0{color:#b33;}
+	.tr1{color:#999;}
+	.tr2{color:#999;opacity:0.5;}
+	
+	table{
+		width:100%;
+		border-collapse: collapse;
+	}
+	
+	.tdL{
+		width:250px !important;
+		background:wheat;
+	}
+	td, tr{
+		border:1px #cbb solid;
+		padding:3px 4px;
+	}
+	tr:hover{
+		background-color: #E8E8E8;
+	}
+	#display{
+		padding:10px;
+	}
+	
+	.ings{
+		margin-right:6px;
+		padding:1px 4px;
+		border-radius:4px;
+	}
+	.makejumb{
+		font-weight: bold;
+	}
+	.makejumb:hover{
+		text-decoration:underline;
+		cursor:pointer;
+	
+	}
+	.makedish:hover{
+		text-decoration:underline;
+		cursor:pointer;
+	}
+	
+	</style>
+	
+</head>
+<body onload="printStuff()">
+
+	<div class="main">
+		<div id="menu" >
+			Please select your ingredient:
+			<div id="ingmenu"></div>
+			<div id="runBT" onclick="search()">FIND RECIPE</div>
+		</div>
+		
+		<div id="display" >
+		</div>
+	</div>
+</body>
+</html>

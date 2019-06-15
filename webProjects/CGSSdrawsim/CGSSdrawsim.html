@@ -1,0 +1,643 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 3.2//EN">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>灰姑娘抽SSR手感模擬器</title>
+	
+	
+    <script>
+		var click = 0;
+		var gotR = 0;
+		var gotSR = 0;
+		var gotSSR = 0;
+		var gotex1 = 0;
+		var gotex2 = 0;
+		var gotex3 = 0;
+		var crycry = 0;
+		var c = 0;
+		
+		//Generate random number
+		function RNG(max)
+		{
+			var random = Math.ceil(Math.random() * max);
+			return random;
+		}
+
+		//Clean values from previous draw 
+		function clean()
+		{
+			click = 0;
+			gotR = 0;
+			gotSR = 0;
+			gotSSR = 0;
+			gotex1 = 0;
+			gotex2 = 0;
+			gotex3 = 0;
+			crycry = 0; 
+		}
+		
+		//一般10抽(run a regular 10 draw)
+		function run10( getget )
+		{
+			var displayBox = document.getElementById('displayBox');
+			var data = document.getElementById('data');
+			var data2 = document.getElementById('data2');
+			
+			var result = "";
+			var got = [];
+			
+			var Rcheck = 0;
+			var SSRcheck = 0;
+			var ex = "";
+			var version = getget;
+			
+			
+			var h1 = document.getElementById('h1');
+			click++;
+			
+			for( var i=0 ; i<10 ; i++)
+			{
+				var x = RNG(1000);
+				
+				if( x <= 30 )
+				{
+				
+					if( version == 0 )
+					{
+						
+						if( x<=4 ){
+								got[i] = "<div class='idol SSR'>限定SSR<span class='nn' >A</span></div>"; 
+								gotex1++;
+							}
+						else if( x<=8 ){
+								got[i] = "<div class='idol SSR'>限定SSR<span class='nn' >B</span></div>";
+								gotex2++;
+							}
+						else 
+								got[i] = "<div class='idol SSR'>恆常SSR</div>";
+							
+					}else if( version == 1 ){
+						if( x<=8 ){
+								got[i] = "<div class='idol SSR'>新SSR<span class='nn' ></span></div>"; 
+								gotex1++;
+							}
+						else 
+							got[i] = "<div class='idol SSR'>恆常SSR</div>";
+					}
+							
+					gotSSR++; SSRcheck++;
+				}
+				else if( x <= 120)
+				{
+					got[i] = "<div class='idol SR'>SR</div>";
+					gotSR++;
+				}					
+				else
+				{
+					got[i] = "<div class='idol R'>R</div>"; 
+					Rcheck++;
+					gotR++;
+					
+				}
+			}
+			
+			//rigged
+			if( Rcheck==10 ){
+				var x = RNG(1000);
+				gotR--;
+				Rcheck--;
+				if( x <= 30)
+				{
+					
+					if( version == 0 )
+					{
+						if( x<=4 ){
+								got[9] = "<div class='idol SSR'>限定SSR<span class='nn' >A</span></div>"; 
+								gotex1++;
+							}
+						else if( x<=8 ){
+								got[9] = "<div class='idol SSR'>限定SSR<span class='nn' >B</span></div>";
+								gotex2++;
+							}
+						else 
+							got[9] = "<div class='idol SSR'>恆常SSR</div>";
+							
+					}else if( version == 1 ){
+						if( x<=8 ){
+								got[9] = "<div class='idol SSR'>新SSR<span class='nn' ></span></div>"; 
+								gotex1++;
+							}
+						else 
+							got[9] = "<div class='idol SSR'>恆常SSR</div>";
+					}
+						
+					gotSSR++; SSRcheck++;
+				}
+				else
+				{
+					got[9] = "<div class='idol SR'>SR</div>";
+					gotSR++;
+				}			
+			}
+			
+			for( var i=0 ; i<10 ; i++){
+				result += got[i];
+			}
+			
+			//計算保底次數
+			if(Rcheck==9 && SSRcheck==0) crycry++;
+			
+			//SSR計算後面的那小句話
+			if( version == 0 )
+				ex = " <span class='exnote'> 含" +gotex1+"限定A，" +gotex2+ "限定B </span>" ;
+			else if( version == 1 )
+				ex = " <span class='exnote'> 含" +gotex1+"新恆常" ;
+				
+			
+			displayBox.innerHTML = result;
+			data2.innerHTML = "<table>"
+									+ "<tr><td class='ltd'>SSR</td><td>" + gotSSR + ex + "</td></tr>"
+									+ "<tr><td class='ltd'>SR</td><td> " +gotSR+ "</td></tr>"
+									+ "<tr><td class='ltd'>R</td><td>" +gotR+"</td></tr></table>" ;
+			data.innerHTML = "<table>"
+									+"<tr><td class='ltd' >抽數</td><td>"+10*click +"連</td></tr>"
+									+"<tr><td class='ltd' >花費寶石</td><td>" + 2500*click +"個</td></tr>"
+									+"<tr><td class='ltd' >大約花費</td><td>" + (parseInt((2500*click)/8400)+1)*9800 +"¥</td></tr>"
+									+"<tr><td class='ltd' >保底十連</td><td>" +click+ "次中有" +crycry+ "次保底</td></tr></table>";
+		}
+		
+		
+		/*1upFES10抽*/
+		function fesrun10()
+		{
+			var displayBox = document.getElementById('displayBox');
+			var data = document.getElementById('data');
+			var data2 = document.getElementById('data2');
+			
+			var result = "";
+			var got = [];
+			
+			var Rcheck = 0;
+			var SSRcheck = 0;
+			var ex = "";
+			
+			click++;
+			for( var i=0 ; i<10 ; i++)
+			{
+				var x = RNG(100000);
+				if( x <= 6000)
+				{
+					if( x<=750 ){
+							got[i] = "<div class='idol SSR'>限定SSR<span class='nn' >新</span></div>"; 
+							gotex1++;
+						}
+					else if( x<=825 ){
+							got[i] = "<div class='idol SSR'>*限定SSR<span class='nn' ></span></div>";
+							gotex2++;
+						}
+					else if( x<=1425 ){
+							got[i] = "<div class='idol SSR'>限定SSR<span class='nn' ></span></div>";
+							gotex3++;
+						}
+					else {
+							got[i] = "<div class='idol SSR'>恆常SSR</div>";
+						}
+						
+					gotSSR++; SSRcheck++;
+				}
+				else if( x <= 12000)
+				{
+					got[i] = "<div class='idol SR'>SR</div>";
+					gotSR++;
+				}					
+				else
+				{
+					got[i] = "<div class='idol R'>R</div>"; 
+					Rcheck++;
+					gotR++;
+				}
+			}
+			
+			//rigged
+			if( Rcheck==10 ){
+				var x = RNG(100000);
+				gotR--;
+				Rcheck--;
+				if( x <= 6000)
+				{
+					if( x<=750 ){
+							got[9] = "<div class='idol SSR'>限定SSR<span class='nn' >新</span></div>"; 
+							gotex1++;
+						}
+					else if( x<=825 ){
+							got[9] = "<div class='idol SSR'>*限定SSR<span class='nn' ></span></div>";
+							gotex2++;
+						}
+					else if( x<=1420 ){
+							got[9] = "<div class='idol SSR'>限定SSR<span class='nn' ></span></div>";
+							gotex3++;
+						}
+					else {
+							got[9] = "<div class='idol SSR'>恆常SSR</div>";
+						}
+						
+					gotSSR++; SSRcheck++;
+				}
+				else
+				{
+					got[9] = "<div class='idol SR'>SR</div>";
+					gotSR++;
+				}			
+			}
+			for( var i=0 ; i<10 ; i++){
+				result += got[i];
+			}
+			if(Rcheck==9 && SSRcheck==0) crycry++;
+			
+			ex = " <span class='exnote'> 含" +gotex1+"新限定，" +gotex3+ "舊限定(" +gotex2+ "目標)</span>" ;
+			
+			displayBox.innerHTML = result;
+			data2.innerHTML = "<table>"
+									+ "<tr><td class='ltd'>SSR</td><td>" + gotSSR + ex + "</td></tr>"
+									+ "<tr><td class='ltd'>SR</td><td> " +gotSR+ "</td></tr>"
+									+ "<tr><td class='ltd'>R</td><td>" +gotR+"</td></tr></table>" ;
+			data.innerHTML = "<table>"
+									+"<tr><td class='ltd' >抽數</td><td>"+10*click +"連</td></tr>"
+									+"<tr><td class='ltd' >花費寶石</td><td>" + 2500*click +"個</td></tr>"
+									+"<tr><td class='ltd' >大約花費</td><td>" + (parseInt((2500*click)/8400)+1)*9800 +"¥</td></tr>"
+									+"<tr><td class='ltd' >保底十連</td><td>" +click+ "次中有" +crycry+ "次保底</td></tr></table>";
+		}
+		
+		//切換版本
+		function switchver( ver ){
+			var h1 = document.getElementById('h1');
+			var note = document.getElementById('note');
+			var displayBox = document.getElementById('displayBox');
+			var data = document.getElementById('data');
+			var data2 = document.getElementById('data2');
+			var warp = document.getElementById('warp');
+			
+			var sBT0 = document.getElementById('sBT0');
+			var sBT1 = document.getElementById('sBT1');
+			var sBT2 = document.getElementById('sBT2');
+			var sBT3 = document.getElementById('sBT3');
+			var sBT9 = document.getElementById('sBT9');
+
+			var focused = "#dbc";
+			var unfocused = "#eee";
+			
+			clean();
+			data.innerHTML = "";
+			data2.innerHTML = "";
+			displayBox.innerHTML = "";
+			
+			
+			if(ver == 0)//switch to ex
+			{
+				h1.innerHTML = "雙限定卡池";
+				note.innerHTML = "SSR→3%(限定→0.4%x2) | SR→12% | R→85%<br>10連內SRx1確保" ;
+				warp.innerHTML = "<div class='button draw' onclick='run10(0)'>10回引く</div><br><br><br>";
+				sBT0.style.background = focused;
+				sBT1.style.background = unfocused;
+				sBT2.style.background = unfocused;
+
+			}else if(ver == 1)//switch to newstd
+			{
+				h1.innerHTML = "新恆常卡池";
+				note.innerHTML = "SSR→3%(新恆常→0.8%x1) | SR→12% | R→85%<br>10連內SRx1確保" ;
+				warp.innerHTML = "<div class='button draw' onclick='run10(1)'>10回引く</div><br><br><br>";
+				sBT0.style.background = unfocused;
+				sBT1.style.background = focused;
+				sBT2.style.background = unfocused;
+				
+			}else if(ver == 2)//switch to 1upfes
+			{
+				h1.innerHTML = "1up FES卡池";
+				note.innerHTML = "SSR→6%(新限→0.75%x1/舊限→0.075%xN/ 恆常→0.068%) | SR→12% | R→82%<br>10連內SRx1確保 / 狙擊特定一隻舊限定" ;
+				warp.innerHTML = "<div class='button draw' onclick='fesrun10()'>10回引く</div><br><br><br>";
+				sBT0.style.background = unfocused;
+				sBT1.style.background = unfocused;
+				sBT2.style.background = focused;
+			}
+			else if(ver == 3)//switch to 3upfes
+			{
+				h1.innerHTML = "3up FES卡池*";
+				note.innerHTML = "SSR→6%(新限→0.75%x1/舊限→0.075%x9/ 恆常→0.068%) | SR→12% | R→82%<br>10連內SRx1確保 / 狙擊特定一隻舊限定" ;
+				warp.innerHTML = "<div class='button draw' onclick='fesrun10()'>10回引く</div><br><br><br>";
+				sBT0.style.background = unfocused;
+				sBT1.style.background = unfocused;
+				sBT2.style.background = focused;
+			}
+			else if(ver == 10)//switch to oldlim
+			{
+				h1.innerHTML = "舊限定卡池";
+				note.innerHTML = "SSR→1.5%(限定→0.3%x2) | SR→10% | R→88.5%<br>10連內SRx1確保" ;
+				warp.innerHTML = "<div class='button draw' onclick='run10(10)'>10回引く</div><br><br><br>";
+				sBT0.style.background = unfocused;
+				sBT1.style.background = unfocused;
+				sBT2.style.background = focused;
+			}
+			
+		}
+    </script>
+	
+	    <style>
+        html{
+				color:#222;
+				font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+				line-height:1.7em;
+			}
+		#warp{
+			margin: 0px auto;
+			width:200px;
+			}
+			
+		.button{
+            padding:5px;
+            border: 1px solid #111;
+            text-align:center;
+
+            -webkit-border-radius:  5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+			user-select: none;
+			
+			box-shadow:rgba(0,0,0,1) 0 5px 0, inset 0 0 3px 2px rgba(255,255,255,0.4);
+
+        }
+		
+		.draw{
+			width:170px;
+			float:left;
+			color:#fff;
+			font-size:19pt;
+			text-shadow:    0px 0px 0 rgba(0,0,0,0.3),
+						   -2px -2px 1px rgba(0,0,0,0.3),  
+							2px -2px 1px rgba(0,0,0,0.3),
+						   -2px  2px 1px rgba(0,0,0,0.3),
+							2px  2px 1px rgba(0,0,0,0.3);
+			-o-transition:background .2s ease-out, background .2s ease-in;
+			-ms-transition:background .2s ease-out, background .2s ease-in;
+			-moz-transition:background .2s ease-out, background .2s ease-in;
+			-webkit-transition:background .2s ease-out, background .2s ease-in;
+			
+			opacity:0.95;
+			background: #cf5bb6; /* Old browsers */
+			background: -moz-linear-gradient(top, #cf5bb6 0%, #c642a3 50%, #a51c7c 51%, #de34a5 100%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, #cf5bb6 0%,#c642a3 50%,#a51c7c 51%,#de34a5 100%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom, #cf5bb6 0%,#c642a3 50%,#a51c7c 51%,#de34a5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		}
+		
+        .button:hover{
+            cursor:pointer;
+        }
+		
+		.button:active{
+            margin-top:5px;
+            box-shadow:none; 
+        }
+
+		#box{
+			background:#fff url(http://i.imgur.com/vdpUR1X.png) no-repeat;
+			background-size:cover;
+			border:1px solid #ccc;
+			width:800px;
+			height:450px;
+			
+		   -moz-box-shadow:    inset 0 0 14px 2px rgba(0,0,0,0.1);
+		   -webkit-box-shadow: inset 0 0 14px 2px rgba(0,0,0,0.1);
+		   box-shadow:         inset 0 0 14px 2px rgba(0,0,0,0.1);			
+		}
+		
+		#displayBox{
+			width:520px;
+			height:200px;
+			padding: 15px 50px 35px 70px;
+			border:1px solid #aaa;
+			background: rgba(210,210,210,0.75);
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+			margin:30px auto 15px auto;
+		}
+		
+        @keyframes fadein {
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:1;
+            }
+        }
+        @-moz-keyframes fadein { /* Firefox */
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:1;
+            }
+        }
+        @-webkit-keyframes fadein { /* Safari and Chrome */
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:1;
+            }
+        }
+        @-o-keyframes fadein { /* Opera */
+            from {
+                opacity:0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+		.nn{
+			font-size:7pt;
+		
+		}
+		.idol{
+			display: inline-block;
+			width:80px !important;
+			height:80px !important;
+			margin-right:16px;
+			margin-top:16px;
+			text-align: center;
+			font-size: 12pt;
+			line-height:80px;
+			border:4px solid #555;
+			-webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+			color:#fff;
+			
+            animation: fadein 1.5s;
+            -moz-animation: fadein 1.5s; /* Firefox */
+            -webkit-animation: fadein 1.5s; /* Safari and Chrome */
+            -o-animation: fadein 1.5s; /* Opera */
+		}
+		
+		.R{
+			background:#bbb; 
+			border:4px solid #999;
+			
+		}
+		.SR{ background:#bb6; border:4px solid #994; }
+		.SSR{
+			border:4px solid #979;
+			background: #FEAC5E;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to bottom right, #4BC0C8, #C779D0, #FEAC5E);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to bottom right, #4BC0C8, #C779D0, #FEAC5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+			box-shadow: 0 0 8px 2px rgba(200, 90, 255, 0.9);			
+		}
+		
+		.data{
+			
+		}
+		.d1{
+			float:left;
+			margin-left:20px;
+			margin-top:-45px;
+			font-size:7pt;
+			}
+		.d2{
+			float:right;
+			margin-right:20px;
+			margin-top:-20px;
+			width:250px;
+			}
+			
+		table {
+			font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+			font-size:10pt;
+			color:#222;
+		}
+		td{
+			padding-left:5px;
+			text-shadow:1px 1px 3px rgba(0,0,0,0.3);
+		}
+		.ltd {
+			font-weight:bold;
+			background:rgba(220,220,220,0.8);
+			padding:2px 5px 2px 5px;
+            -webkit-border-radius:  4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+			text-shadow:none;
+		}
+		.exnote {
+			font-size:9pt;
+			color:#777 !important;
+			border: 1px solid #aaa;
+			padding: 0px 8px;
+            -webkit-border-radius:  4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+			margin-left:5px;
+			background:rgba(255,255,255,0.5);
+		}
+		
+		.header{
+			width:800px;
+			margin:0px auto;
+		}
+		#note{
+			text-align:center;
+			font-size:10pt;	
+			margin:50px auto 0px auto;
+			width:80%;
+		}
+		
+		h1{
+			margin:50px auto -50px auto;
+			text-align:center;
+			padding:10px;
+		}
+
+		.menu{
+			height:500px;
+			width:120px;
+		}
+		.bigwarp{
+			padding-left:70px;
+			width:900px;
+			margin:20px auto;
+			display: flex;
+			align-items: center;
+
+		}
+		
+		.newstd,.newlim,.fes1{
+			float:right;
+            width:90px;
+			margin-top:15px;
+			background:#eee;
+			opacity:1;
+		}
+		
+		.newlim{
+			margin-top:30px !important;
+			background:#dbc;
+		}
+		
+		.newstd:active, .fes1:active, .newlim:active{
+			background:#ccc;
+		}
+		
+		.tab{
+            padding:5px;
+            border: 1px solid #bbb;
+            text-align:center;
+
+            -webkit-border-radius:  5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+			user-select: none;
+			cursor:pointer;
+			/*box-shadow:rgba(0,0,0,1) 0 5px 0, inset 0 0 3px 2px rgba(255,255,255,0.4);*/
+
+        }
+		
+		.tdftad, #ub_iframe, #unitedblades_div, #ub_SpLink{
+			text-align:center;
+			opacity:0 !important;
+			display: none !important;
+			width:0px;
+			height:0px;
+		}
+    </style>
+	
+</head>
+
+<body>
+		
+	<div class="header">
+		<h1 id="h1">雙限定卡池</h1>
+		<div id="note">SSR→3%(限定→0.4%x2) | SR→12% | R→85%<br>10連內SRx1確保</div>
+	</div>
+	<div class="bigwarp">
+		<div id="box">
+			<div id="displayBox"></div>
+			
+			<div id="warp">
+				<div class="button draw" onclick="run10(0)">10回引く</div>
+				<br><br><br>
+			</div>
+			<div id="data" class="data d1">
+			</div>
+			<div id="data2" class="data d2">
+			</div>
+		</div>
+		<div class="menu">
+		<div class="tab newlim" onclick="switchver(0)" id="sBT0" >雙限定</div>
+		<div class="tab newstd" onclick="switchver(1)" id="sBT1" >新恆常</div>
+		<div class="tab fes1" onclick="switchver(2)" id="sBT2" >1up FES</div>
+		<!--<div class="tab 3upfes" onclick="switchver(3)" id="sBT3" >3up FES</div>
+		<div class="tab oldlim" onclick="switchver(9)" id="sBT9" >舊雙限定</div>-->
+
+		</div>
+
+	</div>
+</body>
+</html>

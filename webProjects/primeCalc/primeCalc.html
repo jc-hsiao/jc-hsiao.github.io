@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD html 3.2//EN">
+<html>
+<head>
+   <title>Prime Number Calculator</title>
+    <style>
+        html
+		{
+            color:#433;
+            background:#eaded3;
+            font-size: 16px;
+        }
+
+        hr
+		{
+            border: 0; 
+            height: 2px; 
+            background: #333; 
+            background-image: -webkit-linear-gradient(left, #eaded3, #766, #eaded3); 
+            background-image: -moz-linear-gradient(left, #eaded3, #766, #eaded3); 
+            background-image: -ms-linear-gradient(left, #eaded3, #766, #eaded3); 
+            background-image: -o-linear-gradient(left, #eaded3, #766, #eaded3);
+        }
+        .warper
+        {
+            width:700px;
+            text-align:center;
+            margin:0px auto;
+        }
+        .inputs
+        {
+            width:100px;
+            background:#f8f0f0;
+            border: 1px dotted #995;
+            color:#766;
+            padding:3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            box-shadow: inset 2px 2px 2px 0px rgba(0,0,0,0.3);
+        }
+        .inputwarper
+        {
+            width:210px;
+            text-align:right !important;
+            margin:3px auto;
+        }
+
+        .adj
+		{
+            margin-left:150px;
+        }
+        .button
+        {
+            padding:3px;
+            color:#edd;
+            border: 1px solid #655;
+            background: rgba(119,102,102,1);
+            width:120px;
+            height:42px;
+            float:left;
+            margin-right:10px;
+            text-align:center;
+            text-shadow:rgba(0,0,0,0.5) 1px 1px 2px;
+            box-shadow:rgba(0,0,0,0.2) -1px 2px 1px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+    
+			-o-transition:background .2s ease-out, background .2s ease-in;
+			-ms-transition:background .2s ease-out, background .2s ease-in;
+			-moz-transition:background .2s ease-out, background .2s ease-in;
+			-webkit-transition:background .2s ease-out, background .2s ease-in;
+    
+        }
+        .button:hover
+        {
+            cursor:pointer;
+            background: #c56363;
+        }
+        .button:active
+        {
+            margin-top:1px;
+            box-shadow:rgba(0,0,0,0.5) 0px 0px 0px; 
+        }
+
+        #displayBox
+        {
+            margin: 0px auto;    
+            margin-top:80px;
+            border:1px solid #877;
+            height:auto;
+            width:345px;
+            padding:18px;
+            word-spacing:7px;
+            text-align:left !important;
+            background:#eee5dd;
+            color:#766;
+            box-shadow:rgba(0,0,0,0.2) 2px 2px 1px;
+        }
+        .warning
+        {
+            color:#c56363;
+            word-spacing:2px;
+            text-align:center !important;
+        }
+        .title
+        {
+            color:#edd;
+            background:#655;
+            text-align:center !important;
+            -webkit-border-radius: 20x;
+            -moz-border-radius: 20x;
+            border-radius: 20px;
+            margin-bottom:5px;
+        }
+
+    </style>
+    <script>
+		//Function that will calculate prime and displays them as HTML
+        function clickEvent(type) {
+            var start = document.getElementById('SValueInput').value;
+            var end = document.getElementById('EValueInput').value;
+            var temp = document.getElementById('displayBox');
+            var primes = "<div class='title'>Primes:</div>";
+            var Pprimes = "<div class='title'>Palindromic Primes:</div>";
+            var reversed = 0;
+            var num;
+            var tempNum;
+            var flag = true;
+
+            if (start.length === 0 || end.length === 0) {
+                var warning = "<div class='warning'>Input incorrect!</div>";
+                temp.innerHTML = warning.fontcolor("red");
+            }
+            else {
+                start = parseInt(start);
+                end = parseInt(end);
+                for (var num = start; num <= end; num++) {
+                    if (isPrime(num)) {
+                        primes += num + "  ";
+                        tempNum = num;
+                        while (tempNum !== 0) {
+                            reversed *= 10;
+                            reversed += tempNum % 10;
+                            tempNum -= tempNum % 10;
+                            tempNum /= 10;
+                        }
+                        if (num === reversed) {
+                            Pprimes += reversed + "  ";
+                        }
+                        reversed = 0;
+                    }
+                }
+				
+				//========flags for different buttons========
+                if (type === 0) {
+                    temp.innerHTML = primes;
+                }
+                else if (type === 1) {
+                    temp.innerHTML = Pprimes;
+                }
+                else if (type === 2) {
+                    primes += "<p>" + Pprimes;
+                    temp.innerHTML = primes;
+                }
+            }
+
+        }
+
+        function isPrime(number) {
+            if (number === 1) { return false; }
+            for (var factor = 2; factor < number ; factor++) {
+                if ((number % factor) === 0) { return false; }
+            }
+            return true;
+        }
+    </script>
+
+</head>
+<body>
+<div class="warper" >
+
+    <h>Find the Primes!</h>
+    <hr>
+    <div class="inputwarper">
+        Starting value: <input type="number" class="inputs" id="SValueInput" min="1">
+    </div>
+    <div class="inputwarper">
+        Ending value: <input type="number" class="inputs" id="EValueInput" min="0" max="99999">
+    </div>
+    <br>
+        <div class="button adj" onclick="clickEvent(0)">Find Prime Only</div>
+        <div class="button" onclick="clickEvent(1)">Find Palindromic Prime</div>
+        <div class="button" onclick="clickEvent(2)">Find Both</div>
+
+    
+    <div id="displayBox"></div>
+</div>
+    
+</body>
+</html>

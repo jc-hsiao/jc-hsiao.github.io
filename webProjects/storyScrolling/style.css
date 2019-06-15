@@ -1,0 +1,53 @@
+/* CSS Document */
+
+body,html {
+    margin:0;
+    padding:5px;
+	border:0;
+	font-size:12pt;
+	font-family: "Book Antiqua", Palatino, "Palatino Linotype","Palatino LT STD", Georgia, serif;
+	line-height:2.8em;
+	overflow-X:hidden;
+	overflow-y:hidden;
+	background: repeat-y center top fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100%;  
+}
+
+.bigwarp{
+	padding:60px 50px;
+
+}
+html, html.scrolled, html.scrolled2{
+	background-color:#000;
+	-webkit-transition: background-image 0.5s ease-in-out;
+    -moz-transition: background-image 0.5s ease-in-out;
+    -o-transition: background-image 0.5s ease-in-out;
+    transition: background-image 0.5s ease-in-out;	
+
+}
+html{
+	background-image: url(bg.jpg);
+}
+html.scrolled {
+    background-image: url(bg2.jpg);
+}
+
+html.scrolled2 {
+    background-image: url(bg3.jpg);
+}
+
+p{
+	padding:2px;
+}
+
+.content {
+	color:#fff;
+	border:0px solid rgba(255,255,255,0.3);
+	width: 100%;
+	max-width: 800px;
+}
+	

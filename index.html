@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+		<meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <title>Leila Hsiao</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<script src="scripts.js"></script>
+
+    </head>
+    <body>
+	    <div class="topBar">
+	    	<div class="myName">Leila Hsiao</div>
+			<ul class="menu" id="linklist">
+				<li href="#page1"><a>About</a></li>
+				<li href="#page2"><a>Projects</a></li>
+				<li href="#page3"><a>Web development</a></li>
+				<li href="#page4"><a>Artwork</a></li>
+				<li href="#page5"><a>3D Work</a></li>
+			</ul>
+		</div>
+    	<div class="page-warp">
+	    	<div class="page page1">
+	    		<div class="content">
+	    			<div class="profileBox">
+	    				<div class="profilePic"></div>
+	    				<div class="profileText">
+	    					<span class="title">Hello!</span><br>
+	    					<div class="text">
+	    						I am Leila Hsiao, a programmar graduated from University of Delaware, a self-taught web developer,3D modeler, and artist.<br><br> 
+	    						I enjoy designing and building my own stuff (which includs this site!), also passionate on creating innovative apps, webpages, user interface, games and artworks. And I am eager to learn anything that will help me on my way!
+	    					</div>
+	    					<span class="title">Technical Skills</span><br>
+	    					<div class="text">
+	    						-HTML, CSS, CSS3, JavaScript, PHP, Java, C++, C, SQL, Python<br>
+	    						-Unity, Photoshop, Clip Studio, AutoIt, Blender, MagicaVoxel
+	    					</div>
+	    					<span class="title">Contact</span><br>
+	    					<div class="text">
+	    						hasami75@gmail.com<br>
+	    						leila.jc.hsiao@gmail.com
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="profileBox box2">
+	    				<span class="title">Experiences</span><br>
+	    				<div class="text">
+	    					- Website Development for Renascentia Hall at Newark DE(2015).<br>
+	    					- Website Development for Delaware Steam Academy(2018).
+	    				</div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="page page2">
+	    		<div class="content">
+	    			<p style="color:#fff">Comming Soon!</p>
+	    		</div>	    		
+	    	</div>
+	    	<div class="page page3">
+	    		<div class="content">
+	    		</div>
+	    	</div>
+
+	    	<div class="page page4">
+	    		<div class="content">
+
+	    		</div>
+	    	</div>
+	    	<div class="page page5">
+	    		
+	    	</div>
+	    </div>
+
+
+	    <div class="overlay-holder">	    	
+	    </div>
+
+		<script>
+			var body = document.body;
+			var overlay;
+			
+			var openOBT = document.getElementsByClassName('open-overlay');
+			var closeOBT = document.getElementsByClassName('close-overlay');
+			var jumpOBT = document.getElementsByClassName('jump-overlay');
+
+
+			printGrid(3,"B",numOfBlocks[1]);
+			printGrid(4,"C",numOfBlocks[2]);
+			printGrid(5,"D",numOfBlocks[3]);
+
+			//-------------------------------------------------------------
+			//-- Handles events upon clicking an overlay trigger buttom ---
+
+			for( var i=0; i<openOBT.length; i++){
+
+
+				//if( $(this).parent().parent().parent() == "page page"+currentPage){}
+
+				// Attach event listener to each open-overlay button
+				openOBT[i].addEventListener('click', function() {
+				
+
+					// The ID of button is actually the class of target
+					var target = "." + $(this).attr('id');
+
+					// Print the target overlay
+					printOverlay(target);
+
+					// Make sure the only first image has .current style
+					$(target).children("#img-page").children(".img-nav").children(":first").addClass("img-current");
+					$(target).children("#img-page").children(".img-nav").children(":first").siblings().removeClass("img-current");
+
+					// Triggers overlay display
+					$(target).attr("aria-hidden","false");		
+					// Make body scrollbar disappear
+					body.classList.toggle('noscroll', true);
+
+					setHolderSize(target);
+					overlayHSync(target);
+
+					$(window).resize(function(){ 
+						setHolderSize(target);
+						overlayHSync(target);
+					});
+
+					for( var j=0; j<2; j++){
+						//--- Attach event listener to each close-overlay button ---
+						closeOBT[j].addEventListener('click', function() {
+							// The ID of button is actually the class of target 
+							var closeTarget = "." + $(this).attr('id');
+							
+							// Toggle overlay display
+							$(closeTarget).attr("aria-hidden","true");
+							// Make body scrollbar appear
+							body.classList.toggle('noscroll', false);
+
+							// Make sure the only first image has .current style 
+							$(closeTarget).children("#img-page").children(".img-nav").children(":first").trigger( "click" );
+
+							// Delete the displaying overlay
+							deleteOverlay();
+
+						}, false);
+					}
+					for( var j=0; j<2; j++){
+						//--- Attach event listener to each close-overlay button ---
+						jumpOBT[j].addEventListener('click', function() {
+							
+						}, false);
+					}
+					//-----------------------------------------
+					//--- Handles clicks on image navigator ---
+
+					$(target).children("#img-page").children(".img-nav").children().click(function(event) {
+						//Change thumb style
+						$(this).addClass("img-current");
+						$(this).siblings().removeClass("img-current");   
+
+						//Cross Fade
+						var imgLink = $(this).children().attr("src");
+						var oldImg = $(this).parent().siblings(".img-holder").children();
+						var img = new Image();
+						img.src = $(this).children().attr("src");
+
+						var newImg = $(img).hide();
+						$(this).parent().siblings(".img-holder").append(img);
+						
+						oldImg.stop(true).fadeOut(500, function() {
+						    $(this).remove();
+						});
+						newImg.fadeIn(500);
+					});
+
+				}, false);
+
+			}
+		</script>
+	</body>
+</html>
